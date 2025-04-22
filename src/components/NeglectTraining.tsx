@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Image, ImageOff } from "lucide-react";
 import TargetElement from "./TargetElement";
@@ -37,6 +38,7 @@ const NeglectTraining = () => {
       color: string;
     }[]
   >([]);
+  const [allClicked, setAllClicked] = useState(false);
 
   function generatePositions(amount: number) {
     const sideAmountLeft = Math.ceil(amount / 2);
@@ -72,6 +74,7 @@ const NeglectTraining = () => {
 
   const resetElements = React.useCallback(() => {
     setElements(generatePositions(elementsAmount));
+    setAllClicked(false);
   }, [elementsAmount]);
 
   const handleAmountChange = (value: string) => {
@@ -79,22 +82,28 @@ const NeglectTraining = () => {
   };
 
   useEffect(() => {
+    // יצירת אלמנטים חדשים כאשר משתנה הכמות או כאשר כל האלמנטים נלחצו
     resetElements();
   }, [elementsAmount, resetElements]);
 
-  const handleClick = (elementIdx: number) => {
-    setElements((prev) =>
-      prev.map((el, i) => (i === elementIdx ? { ...el, visible: false } : el))
-    );
+  // בדיקה אם כל האלמנטים נלחצו ויצירת אלמנטים חדשים
+  useEffect(() => {
+    if (allClicked && elements.length > 0) {
+      resetElements();
+    }
+  }, [allClicked, elements.length, resetElements]);
 
-    setTimeout(() => {
-      setElements((currEls) => {
-        if (currEls.every((el) => !el.visible)) {
-          resetElements();
-        }
-        return currEls;
-      });
-    }, 350);
+  const handleClick = (elementIdx: number) => {
+    setElements((prev) => {
+      const newElements = prev.map((el, i) => (i === elementIdx ? { ...el, visible: false } : el));
+      
+      // בדיקה אם כל האלמנטים כבר נלחצו
+      if (newElements.every((el) => !el.visible)) {
+        setAllClicked(true);
+      }
+      
+      return newElements;
+    });
   };
 
   return (
