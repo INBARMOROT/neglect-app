@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Image, ImageOff } from "lucide-react";
 import TargetElement from "./TargetElement";
@@ -82,11 +81,9 @@ const NeglectTraining = () => {
   };
 
   useEffect(() => {
-    // יצירת אלמנטים חדשים כאשר משתנה הכמות או כאשר כל האלמנטים נלחצו
     resetElements();
   }, [elementsAmount, resetElements]);
 
-  // בדיקה אם כל האלמנטים נלחצו ויצירת אלמנטים חדשים
   useEffect(() => {
     if (allClicked && elements.length > 0) {
       resetElements();
@@ -97,7 +94,6 @@ const NeglectTraining = () => {
     setElements((prev) => {
       const newElements = prev.map((el, i) => (i === elementIdx ? { ...el, visible: false } : el));
       
-      // בדיקה אם כל האלמנטים כבר נלחצו
       if (newElements.every((el) => !el.visible)) {
         setAllClicked(true);
       }
@@ -155,8 +151,7 @@ const NeglectTraining = () => {
       </div>
 
       <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 animate-fade-in bg-white/90 rounded-xl px-4 py-2 shadow text-md font-medium text-gray-800 text-right">
-        לחץ על כל העיגולים האדומים והירוקים המופיעים על המסך, אם עוד לא הופיעו עיגולים חדשים סימן שלא סימנת את כולם. <br />
-        ניתן לבחור את מספר העיגולים המופיעים בכל פעם.
+        לחץ על כל העיגולים האדומים והירוקים המופיעים על המסך.
       </div>
 
       {elements.map(
