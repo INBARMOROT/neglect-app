@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const LEFT_COLOR = "#ea384c";
 const RIGHT_COLOR = "#48bb78";
@@ -116,6 +117,18 @@ const NeglectTraining = () => {
       {/* קו ירוק בצד ימין */}
       <div className="absolute right-0 top-0 h-full w-[7px] bg-[#48bb78] z-10 rounded-l-lg shadow-lg" />
 
+      {/* לוגואים */}
+      <div className="absolute top-2 left-4 flex items-center gap-2">
+        <Avatar>
+          <AvatarImage src="/placeholder.svg" alt="Logo 1" />
+          <AvatarFallback>L1</AvatarFallback>
+        </Avatar>
+        <Avatar>
+          <AvatarImage src="/placeholder.svg" alt="Logo 2" />
+          <AvatarFallback>L2</AvatarFallback>
+        </Avatar>
+      </div>
+
       {/* בחירת כמות האלמנטים */}
       <div className="absolute top-2 right-4 z-30 bg-white/90 rounded-xl shadow px-3 py-2 flex items-center gap-2">
         <label className="text-gray-700 font-semibold" htmlFor="elements-amount">
@@ -136,9 +149,9 @@ const NeglectTraining = () => {
       </div>
 
       {/* תיאור למטפל/משתמש */}
-      <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 animate-fade-in bg-white/90 rounded-xl px-4 py-2 shadow text-md font-medium text-gray-800">
-        יש ללחוץ על כל עיגול כאשר הוא מופיע. <br />
-        כל עיגול מופיע באזור אחר בחלק הימני והשמאלי.
+      <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 animate-fade-in bg-white/90 rounded-xl px-4 py-2 shadow text-md font-medium text-gray-800 text-right">
+        לחץ על כל העיגולים המופיעים על המסך, אם עוד לא הופיעו עיגולים חדשים סימן שלא סימנת את כולם. <br />
+        ניתן לבחור את מספר העיגולים המופיעים בכל פעם.
       </div>
 
       {/* כל האלמנטים על המסך */}
@@ -163,3 +176,4 @@ const NeglectTraining = () => {
 };
 
 export default NeglectTraining;
+
