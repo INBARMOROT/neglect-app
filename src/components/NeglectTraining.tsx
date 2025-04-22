@@ -1,6 +1,13 @@
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import TargetElement from "./TargetElement";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const LEFT_COLOR = "#ea384c";
 const RIGHT_COLOR = "#48bb78";
@@ -17,75 +24,90 @@ const RIGHT_ZONE = [60, 98];
 const MIN_TOP = 10; // מרווח מהקצה העליון
 const MAX_TOP = 85; // מרווח מהקצה התחתון
 
-const NeglectTraining = () => {
-  // נשתמש ב־state עבור המיקומים
-  const [elements, setElements] = useState([
-    { id: 1, left: 10, top: 20, side: "left" as "left" | "right", visible: true },
-    { id: 2, left: 80, top: 60, side: "right" as "left" | "right", visible: true },
-  ]);
-  const [lastClicked, setLastClicked] = useState<null | number>(null);
+const AMOUNT_OPTIONS = [2, 4, 6, 8, 10];
 
-  // סדר הופעה משתנה כל קליק
-  function generatePositions() {
-    const left = getRandom(LEFT_ZONE[0], LEFT_ZONE[1]);
-    const right = getRandom(RIGHT_ZONE[0], RIGHT_ZONE[1]);
-    const colorIdx1 = Math.floor(getRandom(0, ELEMENT_COLORS.length));
-    let colorIdx2 = Math.floor(getRandom(0, ELEMENT_COLORS.length));
-    if (colorIdx1 === colorIdx2) colorIdx2 = (colorIdx2 + 1) % ELEMENT_COLORS.length;
-    return [
-      {
-        id: Date.now(),
-        left,
+const NeglectTraining = () => {
+  // מספר האלמנטים שנבחר
+  const [elementsAmount, setElementsAmount] = useState(2);
+
+  // האלמנטים עצמם (מערך)
+  const [elements, setElements] = useState<
+    {
+      id: number;
+      left: number;
+      top: number;
+      side: "left" | "right";
+      visible: boolean;
+      color: string;
+    }[]
+  >([]);
+
+  // יצירת המיקומים והצבעים עבור מספר אלמנטים
+  function generatePositions(amount: number) {
+    const sideAmountLeft = Math.ceil(amount / 2);
+    const sideAmountRight = Math.floor(amount / 2);
+
+    // מיקום אלמנטים לצד שמאל
+    const leftElements = Array.from({ length: sideAmountLeft }, (_, idx) => {
+      const colorIdx = Math.floor(getRandom(0, ELEMENT_COLORS.length));
+      return {
+        id: Date.now() + idx,
+        left: getRandom(LEFT_ZONE[0], LEFT_ZONE[1]),
         top: getRandom(MIN_TOP, MAX_TOP),
         side: "left" as const,
         visible: true,
-        color: ELEMENT_COLORS[colorIdx1],
-      },
-      {
-        id: Date.now() + 1,
-        left: right,
+        color: ELEMENT_COLORS[colorIdx],
+      };
+    });
+
+    // מיקום אלמנטים לצד ימין
+    const rightElements = Array.from({ length: sideAmountRight }, (_, idx) => {
+      const colorIdx = Math.floor(getRandom(0, ELEMENT_COLORS.length));
+      return {
+        id: Date.now() + 100 + idx,
+        left: getRandom(RIGHT_ZONE[0], RIGHT_ZONE[1]),
         top: getRandom(MIN_TOP, MAX_TOP),
         side: "right" as const,
         visible: true,
-        color: ELEMENT_COLORS[colorIdx2],
-      },
-    ];
+        color: ELEMENT_COLORS[colorIdx],
+      };
+    });
+
+    // ערבוב יחד – סדר אקראי
+    const allElements = [...leftElements, ...rightElements];
+    return allElements.sort(() => Math.random() - 0.5);
   }
 
-  // בצע איפוס לשני האלמנטים
-  const resetElements = () => {
-    setElements(generatePositions());
-    setLastClicked(null);
+  // איפוס לפי כמות עדכנית
+  const resetElements = React.useCallback(() => {
+    setElements(generatePositions(elementsAmount));
+  }, [elementsAmount]);
+
+  // שינוי כמות האלמנטים
+  const handleAmountChange = (value: string) => {
+    setElementsAmount(Number(value));
   };
 
+  // התחלת המשחק או החלפת סבב כשכמות האלמנטים משתנה
   useEffect(() => {
-    // התחלה אוטומטית
     resetElements();
-    // eslint-disable-next-line
-  }, []);
+  }, [elementsAmount, resetElements]);
 
-  const handleClick = (idx: number) => {
-    // הסתר את האלמנט שנלחץ
+  // ניהול קליק – הסתרה, בדיקה אם להחזיר את כולם
+  const handleClick = (elementIdx: number) => {
     setElements((prev) =>
-      prev.map((el, i) => (i === idx ? { ...el, visible: false } : el))
+      prev.map((el, i) => (i === elementIdx ? { ...el, visible: false } : el))
     );
-    setLastClicked(idx);
-    // אם השני כבר נלחץ, איפוס מהיר
+
     setTimeout(() => {
-      setElements((els) => {
-        if (els.every((e) => !e.visible)) {
+      setElements((currEls) => {
+        if (currEls.every((el) => !el.visible)) {
           resetElements();
         }
-        return els;
+        return currEls;
       });
     }, 350);
   };
-
-  // התייחסות לאוריינטציה אופקית
-  useEffect(() => {
-    // אוטומטית לא מנטרלים את אוריינטציית המסך, לכן נמליץ למשתמש
-    // אין תמיכה ב-fullscreen JS פה כי שדות מאובטחים, לכן - נשתמש בהתאמה ע"י tailwind
-  }, []);
 
   return (
     <div className="relative w-full h-screen max-h-[100dvh] max-w-[100vw] bg-gray-50 overflow-hidden flex items-center justify-center">
@@ -94,12 +116,32 @@ const NeglectTraining = () => {
       {/* קו ירוק בצד ימין */}
       <div className="absolute right-0 top-0 h-full w-[7px] bg-[#48bb78] z-10 rounded-l-lg shadow-lg" />
 
-      {/* תיאור למטפל/משתמש */}
-      <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 animate-fade-in bg-white/90 rounded-xl px-4 py-2 shadow text-md font-medium text-gray-800">
-        יש ללחוץ על כל עיגול כאשר הוא מופיע. <br /> כל עיגול מופיע באזור אחר בחלק הימני והשמאלי.
+      {/* בחירת כמות האלמנטים */}
+      <div className="absolute top-2 right-4 z-30 bg-white/90 rounded-xl shadow px-3 py-2 flex items-center gap-2">
+        <label className="text-gray-700 font-semibold" htmlFor="elements-amount">
+          מספר נקודות:
+        </label>
+        <Select value={String(elementsAmount)} onValueChange={handleAmountChange}>
+          <SelectTrigger className="w-16" id="elements-amount">
+            <SelectValue placeholder="כמות" />
+          </SelectTrigger>
+          <SelectContent>
+            {AMOUNT_OPTIONS.map((amt) => (
+              <SelectItem key={amt} value={String(amt)}>
+                {amt}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
-      {/* שני האלמנטים */}
+      {/* תיאור למטפל/משתמש */}
+      <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 animate-fade-in bg-white/90 rounded-xl px-4 py-2 shadow text-md font-medium text-gray-800">
+        יש ללחוץ על כל עיגול כאשר הוא מופיע. <br />
+        כל עיגול מופיע באזור אחר בחלק הימני והשמאלי.
+      </div>
+
+      {/* כל האלמנטים על המסך */}
       {elements.map(
         (el, idx) =>
           <TargetElement
