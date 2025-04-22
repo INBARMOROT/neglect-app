@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Image, ImageOff } from "lucide-react";
 import TargetElement from "./TargetElement";
@@ -103,10 +104,10 @@ const NeglectTraining = () => {
       <div className="absolute right-0 top-0 h-full w-[7px] bg-[#48bb78] z-10 rounded-l-lg shadow-lg" />
 
       <div className="absolute top-2 left-4 flex items-center gap-2">
-        <div className="w-10 h-10 rounded-full bg-white border shadow flex items-center justify-center overflow-hidden">
+        <div className="w-12 h-12 rounded-full bg-white border shadow flex items-center justify-center overflow-hidden p-1">
           <img
-            src="https://think-fast-think-right.lovable.app/logo-fast.svg"
-            alt="Think Fast Logo"
+            src="/lovable-uploads/17729d30-faff-4371-88c6-9088dbfb81cb.png"
+            alt="Logo 1"
             onError={(e) => {
               e.currentTarget.src = "/placeholder.svg";
               e.currentTarget.onerror = null;
@@ -114,10 +115,10 @@ const NeglectTraining = () => {
             className="w-full h-full object-contain"
           />
         </div>
-        <div className="w-10 h-10 rounded-full bg-white border shadow flex items-center justify-center overflow-hidden">
+        <div className="w-12 h-12 rounded-full bg-white border shadow flex items-center justify-center overflow-hidden p-1">
           <img
-            src="https://think-fast-think-right.lovable.app/logo-right.svg"
-            alt="Think Right Logo"
+            src="/lovable-uploads/4e84cb59-0e83-4994-bf3d-c19813e5424a.png"
+            alt="Logo 2"
             onError={(e) => {
               e.currentTarget.src = "/placeholder.svg";
               e.currentTarget.onerror = null;
