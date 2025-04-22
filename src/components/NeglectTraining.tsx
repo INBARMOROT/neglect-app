@@ -119,16 +119,17 @@ const NeglectTraining = () => {
 
       {/* לוגואים */}
       <div className="absolute top-2 left-4 flex items-center gap-2">
-        <Avatar>
-          <AvatarImage src="/placeholder.svg" alt="Logo 1" />
-          <AvatarFallback>L1</AvatarFallback>
-        </Avatar>
-        <Avatar>
-          <AvatarImage src="/placeholder.svg" alt="Logo 2" />
-          <AvatarFallback>L2</AvatarFallback>
-        </Avatar>
+        <img
+          src="https://think-fast-think-right.lovable.app/logo-fast.svg"
+          alt="Think Fast Logo"
+          className="w-10 h-10 rounded-full bg-white border shadow"
+        />
+        <img
+          src="https://think-fast-think-right.lovable.app/logo-right.svg"
+          alt="Think Right Logo"
+          className="w-10 h-10 rounded-full bg-white border shadow"
+        />
       </div>
-
       {/* בחירת כמות האלמנטים */}
       <div className="absolute top-2 right-4 z-30 bg-white/90 rounded-xl shadow px-3 py-2 flex items-center gap-2">
         <label className="text-gray-700 font-semibold" htmlFor="elements-amount">
