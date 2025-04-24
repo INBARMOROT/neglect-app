@@ -38,6 +38,7 @@ const NeglectTraining = () => {
     }[]
   >([]);
   const [allClicked, setAllClicked] = useState(false);
+  const [hasStartedClicking, setHasStartedClicking] = useState(false);
 
   function generatePositions(amount: number) {
     const sideAmountLeft = Math.ceil(amount / 2);
@@ -91,6 +92,10 @@ const NeglectTraining = () => {
   }, [allClicked, elements.length, resetElements]);
 
   const handleClick = (elementIdx: number) => {
+    if (!hasStartedClicking) {
+      setHasStartedClicking(true);
+    }
+    
     setElements((prev) => {
       const newElements = prev.map((el, i) => (i === elementIdx ? { ...el, visible: false } : el));
       
@@ -150,21 +155,22 @@ const NeglectTraining = () => {
         </Select>
       </div>
 
-      <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 animate-fade-in bg-white/90 rounded-xl px-4 py-2 shadow text-md font-medium text-gray-800 text-right">
-        לחץ על כל העיגולים המופיעים על המסך
-      </div>
-
-      {elements.map(
-        (el, idx) =>
-          <TargetElement
-            key={el.id}
-            left={el.left}
-            top={el.top}
-            color={el.side === "left" ? LEFT_COLOR : RIGHT_COLOR}
-            onClick={() => handleClick(idx)}
-            visible={el.visible}
-          />
+      {!hasStartedClicking && (
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 animate-fade-in bg-white/90 rounded-xl px-4 py-2 shadow text-md font-medium text-gray-800 text-right">
+          לחץ על כל העיגולים המופיעים על המסך
+        </div>
       )}
+
+      {elements.map((el, idx) => (
+        <TargetElement
+          key={el.id}
+          left={el.left}
+          top={el.top}
+          color={el.side === "left" ? LEFT_COLOR : RIGHT_COLOR}
+          onClick={() => handleClick(idx)}
+          visible={el.visible}
+        />
+      ))}
 
       <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-30 text-gray-600 bg-white/80 rounded-xl px-4 py-1 shadow text-sm">
         מומלץ להחזיק את המכשיר באוריינטציה לרוחב (landscape)
