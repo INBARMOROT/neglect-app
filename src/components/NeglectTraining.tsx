@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Image, ImageOff } from "lucide-react";
 import TargetElement from "./TargetElement";
@@ -86,10 +87,15 @@ const NeglectTraining = () => {
   }, [elementsAmount, resetElements]);
 
   useEffect(() => {
-    if (allClicked && elements.length > 0) {
-      resetElements();
+    if (allClicked) {
+      // Add a small delay before resetting elements
+      const timer = setTimeout(() => {
+        resetElements();
+      }, 300);
+      
+      return () => clearTimeout(timer);
     }
-  }, [allClicked, elements.length, resetElements]);
+  }, [allClicked, resetElements]);
 
   const handleClick = (elementIdx: number) => {
     if (!hasStartedClicking) {
@@ -99,7 +105,8 @@ const NeglectTraining = () => {
     setElements((prev) => {
       const newElements = prev.map((el, i) => (i === elementIdx ? { ...el, visible: false } : el));
       
-      if (newElements.every((el) => !el.visible)) {
+      const allElementsClicked = newElements.every((el) => !el.visible);
+      if (allElementsClicked) {
         setAllClicked(true);
       }
       
