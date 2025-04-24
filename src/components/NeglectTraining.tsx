@@ -80,17 +80,19 @@ const NeglectTraining = () => {
 
   const handleAmountChange = (value: string) => {
     setElementsAmount(Number(value));
+    // Reset the hasStartedClicking state when changing amount
     setHasStartedClicking(false);
   };
 
   useEffect(() => {
     resetElements();
+    // Reset the clicking state when elements amount changes
     setHasStartedClicking(false);
   }, [elementsAmount, resetElements]);
 
-  // This effect watches for allClicked state and resets elements when all are clicked
   useEffect(() => {
     if (allClicked) {
+      // Add a small delay before resetting elements
       const timer = setTimeout(() => {
         resetElements();
       }, 300);
@@ -100,15 +102,12 @@ const NeglectTraining = () => {
   }, [allClicked, resetElements]);
 
   const handleClick = (elementIdx: number) => {
-    // Set hasStartedClicking to true on the first click
-    if (!hasStartedClicking) {
-      setHasStartedClicking(true);
-    }
+    // Set hasStartedClicking to true on first click
+    setHasStartedClicking(true);
     
     setElements((prev) => {
       const newElements = prev.map((el, i) => (i === elementIdx ? { ...el, visible: false } : el));
       
-      // Check if all elements are clicked
       const allElementsClicked = newElements.every((el) => !el.visible);
       if (allElementsClicked) {
         setAllClicked(true);
@@ -117,6 +116,9 @@ const NeglectTraining = () => {
       return newElements;
     });
   };
+
+  // Force the console log to make sure we can see the state
+  console.log('Has started clicking:', hasStartedClicking);
 
   return (
     <div className="relative w-full h-screen max-h-[100dvh] max-w-[100vw] bg-gray-50 overflow-hidden flex items-center justify-center">
