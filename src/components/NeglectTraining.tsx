@@ -151,7 +151,7 @@ const NeglectTraining = () => {
       </div>
 
       <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 animate-fade-in bg-white/90 rounded-xl px-4 py-2 shadow text-md font-medium text-gray-800 text-right">
-        לחץ על כל העיגולים המופיעים על המסך
+        לחץ על כל העיגולים הירוקים והאדומים
       </div>
 
       {elements.map(
