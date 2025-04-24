@@ -80,10 +80,14 @@ const NeglectTraining = () => {
 
   const handleAmountChange = (value: string) => {
     setElementsAmount(Number(value));
+    // Reset the hasStartedClicking state when changing amount
+    setHasStartedClicking(false);
   };
 
   useEffect(() => {
     resetElements();
+    // Reset the clicking state when elements amount changes
+    setHasStartedClicking(false);
   }, [elementsAmount, resetElements]);
 
   useEffect(() => {
@@ -98,9 +102,8 @@ const NeglectTraining = () => {
   }, [allClicked, resetElements]);
 
   const handleClick = (elementIdx: number) => {
-    if (!hasStartedClicking) {
-      setHasStartedClicking(true);
-    }
+    // Set hasStartedClicking to true on first click
+    setHasStartedClicking(true);
     
     setElements((prev) => {
       const newElements = prev.map((el, i) => (i === elementIdx ? { ...el, visible: false } : el));
@@ -113,6 +116,9 @@ const NeglectTraining = () => {
       return newElements;
     });
   };
+
+  // Force the console log to make sure we can see the state
+  console.log('Has started clicking:', hasStartedClicking);
 
   return (
     <div className="relative w-full h-screen max-h-[100dvh] max-w-[100vw] bg-gray-50 overflow-hidden flex items-center justify-center">
@@ -163,7 +169,7 @@ const NeglectTraining = () => {
       </div>
 
       {!hasStartedClicking && (
-        <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 animate-fade-in bg-white/90 rounded-xl px-4 py-2 shadow text-md font-medium text-gray-800 text-right">
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 bg-white/90 rounded-xl px-4 py-2 shadow text-md font-medium text-gray-800 text-right">
           לחץ על כל העיגולים המופיעים על המסך
         </div>
       )}
