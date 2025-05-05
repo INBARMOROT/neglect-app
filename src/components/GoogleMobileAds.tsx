@@ -13,7 +13,7 @@ interface GoogleMobileAdsProps {
 }
 
 const GoogleMobileAds: React.FC<GoogleMobileAdsProps> = ({ 
-  adUnitId = 'ca-app-pub-3940256099942544/6300978111' // Test banner ad unit ID
+  adUnitId = 'ca-app-pub-4533363193509892~7228905677' // Your actual app ID
 }) => {
   const adContainerRef = useRef<HTMLDivElement>(null);
   const adInitialized = useRef(false);
@@ -25,7 +25,7 @@ const GoogleMobileAds: React.FC<GoogleMobileAdsProps> = ({
         // Load the Google Mobile Ads SDK script
         const script = document.createElement('script');
         script.async = true;
-        script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3940256099942544';
+        script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4533363193509892';
         script.crossOrigin = 'anonymous';
         
         script.onload = () => {
@@ -35,7 +35,7 @@ const GoogleMobileAds: React.FC<GoogleMobileAdsProps> = ({
             // Initialize the SDK
             if (window.adsbygoogle) {
               window.adsbygoogle.push({
-                google_ad_client: 'ca-pub-3940256099942544', // Replace with your actual ad client ID
+                google_ad_client: 'ca-pub-4533363193509892', // Your actual ad client ID
                 enable_page_level_ads: true
               });
               
@@ -82,7 +82,7 @@ const GoogleMobileAds: React.FC<GoogleMobileAdsProps> = ({
         <ins
           className="adsbygoogle"
           style={{ display: 'block', width: '100%' }}
-          data-ad-client="ca-pub-3940256099942544" // Replace with your actual ad client ID
+          data-ad-client="ca-pub-4533363193509892" // Your actual ad client ID
           data-ad-slot={adUnitId}
           data-ad-format="auto"
           data-full-width-responsive="true"
