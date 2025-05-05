@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Image, ImageOff } from "lucide-react";
 import TargetElement from "./TargetElement";
@@ -168,7 +167,8 @@ const NeglectTraining = () => {
           />
       )}
 
-      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 w-full max-w-sm">
+      {/* Ad Banner Container */}
+      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 w-full max-w-sm z-20">
         <GoogleMobileAds />
       </div>
 
