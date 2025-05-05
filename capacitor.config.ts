@@ -15,6 +15,15 @@ const config: CapacitorConfig = {
       launchAutoHide: true,
       backgroundColor: "#ea384c"
     }
+  },
+  android: {
+    signingConfig: {
+      keyAlias: 'android',
+      keystorePath: 'android.keystore',
+      keystorePassword: 'android',
+      keyPassword: 'android',
+      certificateFingerprint: '23:A1:C2:F3:1B:FE:CB:03:73:F8:01:A4:21:6A:AF:35:03:53:35:07'
+    }
   }
 };
 
