@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Image, ImageOff } from "lucide-react";
 import TargetElement from "./TargetElement";
@@ -152,13 +151,9 @@ const NeglectTraining = () => {
         </Select>
       </div>
 
-      <h1 className="absolute top-20 left-1/2 -translate-x-1/2 z-20 bg-white/90 rounded-xl px-6 py-3 shadow text-xl font-bold text-gray-800 text-center">
+      <h1 className="absolute top-10 left-1/2 -translate-x-1/2 z-30 bg-white/90 rounded-xl px-6 py-3 shadow text-xl font-bold text-gray-800 text-center w-auto max-w-md">
         לחץ על כל העיגולים המופיעים על המסך
       </h1>
-
-      <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 animate-fade-in bg-white/90 rounded-xl px-4 py-2 shadow text-md font-medium text-gray-800 text-right">
-        לחץ על כל העיגולים האדומים והירוקים המופיעים על המסך, אם עוד לא הופיעו עיגולים חדשים סימן שלא סימנת את כולם. ניתן לבחור את מספר העיגולים המופיעים בכל פעם.
-      </div>
 
       {elements.map(
         (el, idx) =>
