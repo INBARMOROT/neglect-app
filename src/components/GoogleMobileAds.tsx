@@ -1,6 +1,13 @@
 
 import React, { useEffect, useRef } from 'react';
 
+// Add type declaration for the window.adsbygoogle property
+declare global {
+  interface Window {
+    adsbygoogle: any[];
+  }
+}
+
 interface GoogleMobileAdsProps {
   adUnitId?: string;
 }
@@ -27,7 +34,6 @@ const GoogleMobileAds: React.FC<GoogleMobileAdsProps> = ({
             
             // Initialize the SDK
             if (window.adsbygoogle) {
-              // @ts-ignore - Initialize mobile ads
               window.adsbygoogle.push({
                 google_ad_client: 'ca-pub-3940256099942544', // Replace with your actual ad client ID
                 enable_page_level_ads: true
