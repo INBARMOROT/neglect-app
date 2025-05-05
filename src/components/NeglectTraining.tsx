@@ -156,10 +156,6 @@ const NeglectTraining = () => {
         לחץ על כל העיגולים המופיעים על המסך
       </h1>
 
-      <div className="absolute top-36 left-1/2 -translate-x-1/2 z-20 bg-white/90 rounded-xl px-4 py-2 shadow text-md font-medium text-gray-800 text-right max-w-md">
-        לחץ על כל העיגולים האדומים והירוקים המופיעים על המסך, אם עוד לא הופיעו עיגולים חדשים סימן שלא סימנת את כולם. ניתן לבחור את מספר העיגולים המופיעים בכל פעם.
-      </div>
-
       {elements.map(
         (el, idx) =>
           <TargetElement
