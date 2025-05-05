@@ -1,6 +1,8 @@
+
 import React, { useState, useEffect } from "react";
 import { Image, ImageOff } from "lucide-react";
 import TargetElement from "./TargetElement";
+import GoogleMobileAds from "./GoogleMobileAds";
 import {
   Select,
   SelectContent,
@@ -151,7 +153,7 @@ const NeglectTraining = () => {
       </div>
 
       <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 animate-fade-in bg-white/90 rounded-xl px-4 py-2 shadow text-md font-medium text-gray-800 text-right">
-        לחץ על כל העיגולים האדומים והירוקים
+        לחץ על כל העיגולים האדומים והירוקים המופיעים על המסך, אם עוד לא הופיעו עיגולים חדשים סימן שלא סימנת את כולם. ניתן לבחור את מספר העיגולים המופיעים בכל פעם.
       </div>
 
       {elements.map(
@@ -165,6 +167,10 @@ const NeglectTraining = () => {
             visible={el.visible}
           />
       )}
+
+      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 w-full max-w-sm">
+        <GoogleMobileAds />
+      </div>
 
       <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-30 text-gray-600 bg-white/80 rounded-xl px-4 py-1 shadow text-sm">
         מומלץ להחזיק את המכשיר באוריינטציה לרוחב (landscape)
