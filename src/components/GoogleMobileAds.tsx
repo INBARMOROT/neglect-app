@@ -13,7 +13,7 @@ interface GoogleMobileAdsProps {
 }
 
 const GoogleMobileAds: React.FC<GoogleMobileAdsProps> = ({ 
-  adUnitId = 'ca-app-pub-4533363193509892~7228905677' // Your actual app ID
+  adUnitId = 'ca-app-pub-4533363193509892/1369240183' // Your actual ad unit ID
 }) => {
   const adContainerRef = useRef<HTMLDivElement>(null);
   const adInitialized = useRef(false);
