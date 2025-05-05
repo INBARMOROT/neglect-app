@@ -27,5 +27,18 @@ export default defineConfig(({ mode }) => ({
     modulePreload: {
       polyfill: true,
     },
+    // Ensure no debug fingerprints are added to build
+    assetsInlineLimit: 4096,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: [
+            'react', 
+            'react-dom',
+            'react-router-dom'
+          ]
+        }
+      }
+    }
   },
 }));
