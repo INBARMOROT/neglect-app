@@ -21,7 +21,8 @@ const config: CapacitorConfig = {
       keyAlias: 'android',
       keystorePath: 'android.keystore',
       keystorePassword: 'android',
-      keyPassword: 'android'
+      keyPassword: 'android',
+      certificateFingerprint: 'F8:34:B9:19:FA:7E:F7:B1:28:7A:58:30:42:58:3E:D2:12:4C:4E:5A'
     }
   }
 };
