@@ -23,6 +23,8 @@ export default defineConfig(({ mode }) => ({
   // Make sure to always generate sourcemaps for proper debugging
   build: {
     sourcemap: true,
+    outDir: 'dist',
+    assetsDir: 'assets',
     // Avoid potential CSP issues with inline scripts
     modulePreload: {
       polyfill: true,
