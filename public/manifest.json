@@ -1,4 +1,3 @@
-
 {
   "short_name": "המוח",
   "name": "המוח - סריקה מרחבית",
@@ -7,14 +6,26 @@
     {
       "src": "/lovable-uploads/app-icon.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/lovable-uploads/app-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ea384c",
   "orientation": "any",
   "scope": "/",
-  "version": "1.0.1"
+  "version": "1.0.1",
+  "fingerprints": {
+    "md5": "F7:E7:49:6E:D8:A6:FF:BD:97:58:E8:12:14:E9:A7:39",
+    "sha1": "B1:BE:E9:E1:4C:9A:96:B3:71:8B:DB:C6:98:78:87:81:D0:10:ED:43",
+    "sha256": "83:0C:AD:2A:F9:C5:7B:E0:8B:08:46:C7:40:20:4C:59:89:56:42:CC:2E:CC:7B:3B:FD:5A:1A:3C:E7:0F:BD:2A"
+  }
 }
