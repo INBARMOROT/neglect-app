@@ -15,9 +15,9 @@
     <meta name="google-adsense-account" content="ca-pub-4533363193509892">
 
     <!-- PWA manifest + icons -->
-    <link rel="manifest" href="/manifest.json" />
-    <link rel="icon" href="/lovable-uploads/app-icon.png" type="image/png" />
-    <link rel="apple-touch-icon" href="/lovable-uploads/app-icon.png" />
+    <link rel="manifest" href="/neglect-app/manifest.json" />
+    <link rel="icon" href="/neglect-app/lovable-uploads/app-icon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/neglect-app/lovable-uploads/app-icon.png" />
     <meta name="theme-color" content="#ea384c" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -36,7 +36,7 @@
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js')
+          navigator.serviceWorker.register('/neglect-app/sw.js')
             .then(registration => {
               console.log('ServiceWorker registration successful');
             })
