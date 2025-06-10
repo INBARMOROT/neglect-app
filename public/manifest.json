@@ -4,24 +4,24 @@
   "description": "אפליקציה לסריקה מרחבית של המוח",
   "icons": [
     {
-      "src": "/neglect-app/lovable-uploads/app-icon.png",
+      "src": "./lovable-uploads/app-icon.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/neglect-app/lovable-uploads/app-icon.png",
+      "src": "./lovable-uploads/app-icon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     }
   ],
-  "start_url": "/neglect-app/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ea384c",
   "orientation": "any",
-  "scope": "/neglect-app/",
+  "scope": "./",
   "version": "1.0.1",
   "fingerprints": {
     "md5": "F7:E7:49:6E:D8:A6:FF:BD:97:58:E8:12:14:E9:A7:39",
